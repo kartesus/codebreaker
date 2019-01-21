@@ -4,32 +4,32 @@ export type Action =
 
 type HintElement = "x" | "o" | "-";
 type Move = { guess: Number[]; hint: HintElement[] };
-type Game = { code: number[]; guesses: Move[]; isBroken: boolean };
+type Board = { code: number[]; guesses: Move[]; isDone: boolean };
 
-export function withCode(code: number[]): Action[] {
+export function setup(code: number[]): Action[] {
   return [{ type: "SetCode", code }];
 }
 
-export function reify(actions: Action[]): Game {
+export function reify(actions: Action[]): Board {
   return actions.reduce(
-    (game: Game, action: Action) => {
+    (game: Board, action: Action) => {
       switch (action.type) {
         case "SetCode":
           return Object.assign(game, { code: action.code });
         case "AddGuess":
           let hint = compare(game.code, action.guess);
           game.guesses.push({ guess: action.guess, hint });
-          if (/[^\-\x]/.test(hint.join(""))) game.isBroken = true;
+          if (/[^\-\x]/.test(hint.join(""))) game.isDone = true;
           return game;
       }
     },
-    { code: [], guesses: [], isBroken: false }
+    { code: [], guesses: [], isDone: false }
   );
 }
 
 export function guess(game: Action[], guess: number[]): Action[] {
   let g = reify(game);
-  if (g.isBroken) return game;
+  if (g.isDone) return game;
   game.push({ type: "AddGuess", guess });
   return game;
 }
