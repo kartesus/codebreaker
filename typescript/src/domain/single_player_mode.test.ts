@@ -5,8 +5,8 @@ let attempt: SinglePlayerMode.Attempt;
 
 beforeEach(() => {
   let x = SinglePlayerMode.newGame({ code: [1, 2, 3, 4], maxAttempts: 3 });
-  game = x[0];
-  attempt = x[1];
+  game = x[0] as SinglePlayerMode.Game;
+  attempt = x[1] as SinglePlayerMode.Attempt;
 });
 
 test("player attempts are recorded", () => {
