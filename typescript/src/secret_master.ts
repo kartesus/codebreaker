@@ -14,6 +14,7 @@ export function build({ size, elements }: config): Master {
 }
 
 function shuffle(arr: number[]) {
+  arr = arr.map(x => x);
   let currentIndex = arr.length;
   while (currentIndex !== 0) {
     let randomIndex = Math.floor(Math.random() * currentIndex);

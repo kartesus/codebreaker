@@ -7,7 +7,9 @@ export type Game = {
 };
 export type Attempt = (guess: number[]) => void;
 
-export function newGame({ code, maxAttempts }) {
+type GameAttempt = [Game, Attempt];
+
+export function newGame({ code, maxAttempts }): GameAttempt {
   let board = newBoard(code);
   let nAttempts = 0;
   let maxAttemptsCallback = (game: Game) => {};
