@@ -6,7 +6,7 @@ beforeEach(() => {
   board = Board.setup([1, 2, 3, 4]);
 });
 
-test("reify game", () => {
+test("reify board", () => {
   let b = Board.reify(board);
   expect(b).toMatchObject({ code: [1, 2, 3, 4], guesses: [], isDone: false });
 });
