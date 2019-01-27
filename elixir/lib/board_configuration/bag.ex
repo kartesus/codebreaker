@@ -6,8 +6,6 @@ defmodule CodeBreaker.BoardConfiguration.Bag do
     bag
   end
 
-  def destroy(pid), do: Agent.stop(pid)
-
   def take(agent, n) do
     Agent.get(agent, fn elements ->
       elements
@@ -19,9 +17,17 @@ defmodule CodeBreaker.BoardConfiguration.Bag do
 
   def contains?(agent, code) do
     Agent.get(agent, fn elements ->
-      code
-      |> Enum.into(%MapSet{})
-      |> MapSet.subset?(elements)
+      unique? =
+        code
+        |> Enum.uniq()
+        |> (fn filtered -> filtered == code end).()
+
+      subset? =
+        code
+        |> Enum.into(%MapSet{})
+        |> MapSet.subset?(elements)
+
+      unique? && subset?
     end)
   end
 end

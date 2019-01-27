@@ -9,7 +9,11 @@ defmodule CodeBreaker.BoardConfiguration.BagTest do
 
     assert length(code) == 3
     assert Bag.contains?(bag, code)
+  end
 
-    Bag.destroy(bag)
+  test "elements of code should be unique" do
+    bag = Bag.of([1, 2, 3, 4, 5, 6])
+
+    assert not Bag.contains?(bag, [1, 1, 1])
   end
 end

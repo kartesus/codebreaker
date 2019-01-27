@@ -3,6 +3,7 @@
               {description,"codebreaker"},
               {modules,['Elixir.CodeBreaker',
                         'Elixir.CodeBreaker.BoardConfiguration.Bag',
-                        'Elixir.CodeBreaker.BoardConfiguration.Matcher']},
+                        'Elixir.CodeBreaker.BoardConfiguration.Matcher',
+                        'Elixir.CodeBreaker.PlayingModes.SinglePlayer']},
               {registered,[]},
               {vsn,"0.1.0"}]}.
